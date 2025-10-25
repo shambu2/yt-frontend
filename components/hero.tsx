@@ -18,7 +18,7 @@ export function HeroSection() {
     try {
       // const response = await axios.post("http://localhost:4000/download", {
   
-      const response = await fetch('${process.env.backendUrl}download', {
+      const response = await fetch('${process.env.backendUrl}/download', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
