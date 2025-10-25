@@ -12,12 +12,12 @@ import { useState } from "react";
 
 export function HeroSection() {
   const [url, setUrl] = useState<any>("");
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {
     try {
       // const response = await axios.post("http://localhost:4000/download", {
-  
+      setLoading(true);
       const response = await fetch('https://yt-backend-init.onrender.com/download', {
         method: 'POST',
         headers: {
@@ -25,7 +25,7 @@ export function HeroSection() {
         },
         body: JSON.stringify({ url }),
       });
-
+      setLoading(false);
       if (!response.ok) {
         throw new Error('Download failed');
       }
@@ -98,12 +98,13 @@ export function HeroSection() {
           />
           <Button
             type="submit"
+            disabled={loading}
             onClick={handleDownload}
             //   disabled={loading || !url.trim()}
             className="h-14 px-8 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
           >
             <Download className="w-5 h-5" />
-            {/* {loading ? "Processing..." : "Download"} */}
+            {loading ? "Processing..." : "Download"}
           </Button>
         </div>
         <p className="text-xs text-muted-foreground text-center">
